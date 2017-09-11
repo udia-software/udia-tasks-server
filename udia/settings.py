@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SITE_ID = 1
 
 # Application definition
 
@@ -37,8 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
     'rest_framework',
-    'api.apps.ApiConfig'
+    'rest_framework.authtoken',
+    'api.apps.ApiConfig',
+    'rest_auth',
 ]
 
 MIDDLEWARE = [
@@ -134,3 +141,15 @@ REST_FRAMEWORK = {
     ),
     'PAGE_SIZE': 10
 }
+
+# Email Backend
+# https://docs.djangoproject.com/en/1.11/ref/settings/#email-backend
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Django Rest Auth/Django All Auth
+REST_USE_JWT = True
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = True
+OLD_PASSWORD_FIELD_ENABLED = True
