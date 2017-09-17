@@ -1,6 +1,8 @@
 # Udia Server
 
-Universal Dream | Infinite Awareness
+![UDIA](logo.png)
+
+**Universal Dream | Infinite Awareness**
 
 * The public facing API can be found at [https://udia-server.herokuapp.com](https://udia-server.herokuapp.com)
 
@@ -30,3 +32,13 @@ $ git push heroku master
 $ heroku run python manage.py migrate
 $ heroku open
 ```
+
+## License
+
+Udia Software Incorporated (UDIA)
+
+Copyright (c) 2016-2017 Udia Software Incorporated. All Rights Reserved.
+
+Common Public Attribution License Version 1.0 (CPAL-1.0)
+
+Full license text can be found at [LICENSE](LICENSE)
