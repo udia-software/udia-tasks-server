@@ -4,8 +4,7 @@ from urllib.parse import urljoin
 
 class CustomAccountAdapter(DefaultAccountAdapter):
     """
-    HACK: manually add in client URLs for valid authentication emails
-    also this only works for 'activation links' and not password reset?
+    Manually set `activate_url` to point to client URL for email validation
     """
     def send_mail(self, template_prefix, email, context):
         verify_stub = "{}/{}".format("/auth/verify-email", context["key"])

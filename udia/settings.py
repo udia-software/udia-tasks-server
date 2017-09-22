@@ -61,7 +61,6 @@ INSTALLED_APPS = (
     'rest_framework',
     'rest_framework.authtoken',
     'api.apps.ApiConfig',
-    'hello'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -191,7 +190,7 @@ AUTHENTICATION_BACKENDS = (
 # Django Rest Auth/Django All Auth
 REST_USE_JWT = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'optional'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True
 OLD_PASSWORD_FIELD_ENABLED = True

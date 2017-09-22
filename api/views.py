@@ -2,9 +2,7 @@
 Views for API
 """
 from django.contrib.auth.models import User, Group
-from rest_framework import viewsets, status
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
+from rest_framework import viewsets
 from .serializers import UserSerializer, GroupSerializer
 
 
@@ -22,7 +20,3 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
-
-@api_view()
-def null_view(request):
-    return Response(status=status.HTTP_400_BAD_REQUEST)
