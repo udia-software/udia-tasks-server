@@ -18,24 +18,29 @@ if ENV not in ["DEV", "TEST", "PROD"]:
     raise Exception("Invalid env `DJANGO_ENVIRONMENT` '{}', ".format(ENV) + 
         "set to be one of ('DEV', 'TEST', 'PROD')")
 
+HTTP_PROTOCOL = os.environ.get("HTTP_PROTOCOL", "http://")
+CLIENT_URL = "{0}{1}".format(HTTP_PROTOCOL, os.environ.get("CORS_DOMAIN"))
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
-
-
 if ENV == "PROD":
     SECRET_KEY = os.environ.get("SECRET_KEY")
     DEBUG = False
     CORS_ORIGIN_WHITELIST = [os.environ.get("CORS_DOMAIN")]
     ALLOWED_HOSTS = [os.environ.get("ALLOWED_HOST")]
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_HOST = os.environ.get("EMAIL_HOST")
+    EMAIL_PORT = os.environ.get("EMAIL_PORT")
+    EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+    EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+    EMAIL_USE_TLS = True
 else:
-    SECRET_KEY = 'i+acxn5(akgsn!sr4^qgf(^m&*@+g1@u^t@=8s@axc41ml*f=s'
+    SECRET_KEY = "i+acxn5(akgsn!sr4^qgf(^m&*@+g1@u^t@=8s@axc41ml*f=s"
     DEBUG = True
     CORS_ORIGIN_ALLOW_ALL = True
     ALLOWED_HOSTS = []
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 TEST_RUNNER = 'udia.heroku_test_runner.HerokuDiscoverRunner'
 
@@ -82,7 +87,6 @@ TEMPLATES = [
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
-            'debug': True,
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -175,14 +179,19 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10
 }
 
-# Email Backend
-# https://docs.djangoproject.com/en/1.11/ref/settings/#email-backend
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+ACCOUNT_ADAPTER = 'udia.adapter.CustomAccountAdapter'
+
+AUTHENTICATION_BACKENDS = (
+     # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 
 # Django Rest Auth/Django All Auth
 REST_USE_JWT = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True
 OLD_PASSWORD_FIELD_ENABLED = True

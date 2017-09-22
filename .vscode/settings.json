@@ -1,4 +1,5 @@
 {
     "python.pythonPath": "/Users/udia/.virtualenvs/udia-server-Sa01aLN-/bin/python",
-    "python.linting.pylintEnabled": false
+    "python.linting.pylintEnabled": false,
+    "editor.tabSize": 4
 }
