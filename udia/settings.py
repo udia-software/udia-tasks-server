@@ -13,6 +13,10 @@ import os
 import dj_database_url
 
 SITE_ID = 1
+ENV = os.environ.get("DJANGO_ENVIRONMENT")
+if ENV not in ["DEV", "TEST", "PROD"]:
+    raise Exception("Invalid env `DJANGO_ENVIRONMENT` '{}', ".format(ENV) + 
+        "set to be one of ('DEV', 'TEST', 'PROD')")
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -21,14 +25,19 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
-# SECURITY WARNING: change this before deploying to production!
-SECRET_KEY = 'i+acxn5(akgsn!sr4^qgf(^m&*@+g1@u^t@=8s@axc41ml*f=s'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if ENV == "PROD":
+    SECRET_KEY = os.environ.get("SECRET_KEY")
+    DEBUG = False
+    CORS_ORIGIN_WHITELIST = [os.environ.get("CORS_DOMAIN")]
+    ALLOWED_HOSTS = [os.environ.get("ALLOWED_HOST")]
+else:
+    SECRET_KEY = 'i+acxn5(akgsn!sr4^qgf(^m&*@+g1@u^t@=8s@axc41ml*f=s'
+    DEBUG = True
+    CORS_ORIGIN_ALLOW_ALL = True
+    ALLOWED_HOSTS = []
 
 TEST_RUNNER = 'udia.heroku_test_runner.HerokuDiscoverRunner'
-
 
 # Application definition
 
@@ -42,6 +51,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'allauth',
     'allauth.account',
+    'corsheaders',
     'rest_auth.registration',
     'rest_framework',
     'rest_framework.authtoken',
@@ -53,6 +63,7 @@ MIDDLEWARE_CLASSES = (
     # Simplified static file serving.
     # https://warehouse.python.org/project/whitenoise/
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -170,7 +181,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Django Rest Auth/Django All Auth
 REST_USE_JWT = True
-ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True
