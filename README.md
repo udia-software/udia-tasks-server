@@ -38,6 +38,8 @@ The environment variables are set when the application is first loaded. **Set th
 | `EMAIL_HOST_USER`     | `<user>`           | Sending Email username              |
 | `EMAIL_HOST_PASSWORD` | `<pass>`           | Sending Email password              |
 | `HTTP_PROTOCOL`       | `http://`          | May be `http://` or `https://`      |
+| `HTTP_PROTOCOL`       | `http://`          | May be `http://` or `https://`      |
+| `ENABLE_PROD_DEBUG`   | ` `                | Enable Debug in Production if value |
 
 ## Email Gotchas
 

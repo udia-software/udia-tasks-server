@@ -27,6 +27,8 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 if ENV == "PROD":
     SECRET_KEY = os.environ.get("SECRET_KEY")
     DEBUG = False
+    if os.environ.get("ENABLE_PROD_DEBUG", False):
+        DEBUG = True
     CORS_ORIGIN_WHITELIST = [os.environ.get("CORS_DOMAIN")]
     ALLOWED_HOSTS = [os.environ.get("ALLOWED_HOST")]
     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
