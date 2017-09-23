@@ -13,13 +13,13 @@ import os
 import dj_database_url
 
 SITE_ID = 1
-ENV = os.environ.get("DJANGO_ENVIRONMENT")
+ENV = os.environ.get("DJANGO_ENVIRONMENT", "DEV")
 if ENV not in ["DEV", "TEST", "PROD"]:
     raise Exception("Invalid env `DJANGO_ENVIRONMENT` '{}', ".format(ENV) + 
         "set to be one of ('DEV', 'TEST', 'PROD')")
 
 HTTP_PROTOCOL = os.environ.get("HTTP_PROTOCOL", "http://")
-CLIENT_URL = "{0}{1}".format(HTTP_PROTOCOL, os.environ.get("CORS_DOMAIN"))
+CLIENT_URL = "{0}{1}".format(HTTP_PROTOCOL, os.environ.get("CORS_DOMAIN", "localhost:3000"))
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -43,6 +43,9 @@ else:
     CORS_ORIGIN_ALLOW_ALL = True
     ALLOWED_HOSTS = []
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+SERVER_EMAIL = os.environ.get("FROM_EMAIL", "noreply@udia.ca")
+DEFAULT_FROM_EMAIL = os.environ.get("FROM_EMAIL", "noreply@udia.ca")
 
 TEST_RUNNER = 'udia.heroku_test_runner.HerokuDiscoverRunner'
 

@@ -39,6 +39,7 @@ The environment variables are set when the application is first loaded. **Set th
 | `EMAIL_HOST_PASSWORD` | `<pass>`           | Sending Email password              |
 | `HTTP_PROTOCOL`       | `http://`          | May be `http://` or `https://`      |
 | `HTTP_PROTOCOL`       | `http://`          | May be `http://` or `https://`      |
+| `FROM_EMAIL`          | `noreply@udia.ca`  | Set to be the server's email        |
 | `ENABLE_PROD_DEBUG`   | ` `                | Enable Debug in Production if value |
 
 ## Email Gotchas

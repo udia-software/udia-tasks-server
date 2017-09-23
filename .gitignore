@@ -2,4 +2,6 @@ venv
 *.pyc
 staticfiles
 .env
+.env.dev
+.env.staging
 db.sqlite3
