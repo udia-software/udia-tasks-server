@@ -22,4 +22,7 @@ urlpatterns = [
     url(r'^auth/verify-email/(?P<key>.+)/$',
         null_view,
         name='account_confirm_email'),
+    url(r'^auth/verification-sent/$',
+        null_view,
+        name='account_email_verification_sent'),
 ]
