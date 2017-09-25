@@ -32,7 +32,6 @@ $ git remote -v
 heroku	https://git.heroku.com/udia-server.git (fetch)
 heroku	https://git.heroku.com/udia-server.git (push)
 ...
-
 # otherwise set the remote
 $ heroku git:remote -a udia-server
 set git remote heroku to https://git.heroku.com/udia-server.git
