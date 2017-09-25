@@ -12,9 +12,13 @@ from .serializers import (UserSerializer, GroupSerializer, GoalSerializer,
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
+    Only return current user for now
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
+
+    def get_queryset(self):
+        return User.objects.filter(id=self.request.user.id)
 
 
 class GroupViewSet(viewsets.ModelViewSet):
