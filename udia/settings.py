@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import pwd
 import dj_database_url
 
 SITE_ID = 1
@@ -62,6 +63,7 @@ INSTALLED_APPS = (
     'allauth',
     'allauth.account',
     'corsheaders',
+    'guardian',
     'rest_auth.registration',
     'rest_framework',
     'rest_framework.authtoken',
@@ -103,17 +105,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'udia.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 
@@ -141,8 +132,20 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
+# Database
+# https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
-# Update database configuration with $DATABASE_URL.
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'udia_server',
+        'USER': pwd.getpwuid(os.getuid()).pw_name,
+        'PASSWORD': '',
+        'HOST': '127.0.0.1',
+        'PORT': '5432'
+    }
+}
+# Update database configuration with $DATABASE_URL, if it exists
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 DATABASES['default']['TEST'] = {'NAME': DATABASES['default']['NAME']}
@@ -173,7 +176,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # http://www.django-rest-framework.org/api-guide/settings/
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+        'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.BasicAuthentication',
@@ -190,10 +193,10 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
+    'guardian.backends.ObjectPermissionBackend',
 )
 
 # Django Rest Auth/Django All Auth
-REST_USE_JWT = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_EMAIL_REQUIRED = True

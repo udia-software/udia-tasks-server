@@ -13,8 +13,8 @@ requests = "*"
 djangorestframework = "*"
 django-allauth = "*"
 django-rest-auth = "*"
-djangorestframework-jwt = "*"
 django-cors-headers = "*"
+django-guardian = "*"
 
 [requires]
 python_version = "3.6"

@@ -8,7 +8,9 @@
 
 ## Running Locally
 
-Make sure you have Python [installed properly](http://install.python-guide.org).  Also, install the [Heroku Toolbelt](https://toolbelt.heroku.com/).
+Make sure you have Python [installed properly](http://install.python-guide.org), [Heroku Toolbelt](https://toolbelt.heroku.com/), and access to a running PostgreSQL instance (like [Postgres.app](http://postgresapp.com/)).
+
+If using Postgres.app as the DB, no configuration of the `DATABASE_URL` is needed.
 
 ```sh
 $ pipenv install
@@ -32,7 +34,7 @@ The environment variables are set when the application is first loaded. **Set th
 | `ALLOWED_HOST`        | `localhost:5000`   | Value of API (server) host url      |
 | `CORS_DOMAIN`         | `localhost:3000`   | Value of Client url                 |
 | `SECRET_KEY`          | `<hash>`           | Django Secret Key                   |
-| `DATABASE_URL`        | `postgres://<foo>` | DB URL (dev/test uses `sqlite3`)    |
+| `DATABASE_URL`        | `postgres://<foo>` | DB URL                              |
 | `EMAIL_HOST`          | `smtp.mailgun.org` | Host for sending email              |
 | `EMAIL_PORT`          | `2525`             | Port for sending email              |
 | `EMAIL_HOST_USER`     | `<user>`           | Sending Email username              |
