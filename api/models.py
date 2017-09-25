@@ -15,7 +15,7 @@ class Goal(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=140)
     tag = models.CharField(max_length=14, db_index=True)
-    additional_info = JSONField(default=dict, blank=True, null=True)
+    additional_info = JSONField(default=dict, blank=True)
 
     class Meta:
         unique_together = (("user", "tag"),)
@@ -52,7 +52,7 @@ class Task(models.Model):
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=140)
-    additional_info = JSONField(default=dict, blank=True, null=True)
+    additional_info = JSONField(default=dict, blank=True)
     time_difficulty = models.PositiveSmallIntegerField(
         choices=TIME_CHOICES,
         default=1
@@ -65,7 +65,7 @@ class Task(models.Model):
         choices=FOCUS_CHOICES,
         default=3
     )
-    completed_info = JSONField(default=dict, blank=True, null=True)
+    completed_info = JSONField(default=dict, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     goals = models.ManyToManyField(Goal)
