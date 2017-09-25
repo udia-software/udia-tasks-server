@@ -24,6 +24,24 @@ $ heroku local
 
 Your app should now be running on [localhost:5000](http://localhost:5000/).
 
+## Deploy to Heroku
+
+1. Ensure Heroku is added as one of your Git remotes
+```bash
+$ git remote -v
+heroku	https://git.heroku.com/udia-server.git (fetch)
+heroku	https://git.heroku.com/udia-server.git (push)
+...
+
+# otherwise set the remote
+$ heroku git:remote -a udia-server
+set git remote heroku to https://git.heroku.com/udia-server.git
+$ git remote add heroku https://git.heroku.com/udia-server.git
+```
+
+2. Push your changes to heroku with `git push heroku master`
+3. Migrations will automatically be applied upon successful release.
+
 ## Environment Variables
 
 The environment variables are set when the application is first loaded. **Set these values on your production server accordingly.**
