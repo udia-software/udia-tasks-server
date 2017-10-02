@@ -1,10 +1,10 @@
-# Udia Server
+# Udia Server (Tasks)
 
 ![UDIA](logo.png)
 
 **Universal Dream | Infinite Awareness**
 
-* The public facing API can be found at [https://udia-server.herokuapp.com](https://udia-server.herokuapp.com)
+* The public facing API can be found at [https://udia-tasks-server.herokuapp.com](https://udia-tasks-server.herokuapp.com)
 
 ## Running Locally
 
@@ -29,13 +29,13 @@ Your app should now be running on [localhost:5000](http://localhost:5000/).
 1. Ensure Heroku is added as one of your Git remotes
 ```bash
 $ git remote -v
-heroku	https://git.heroku.com/udia-server.git (fetch)
-heroku	https://git.heroku.com/udia-server.git (push)
+heroku	https://git.heroku.com/udia-tasks-server.git (fetch)
+heroku	https://git.heroku.com/udia-tasks-server.git (push)
 ...
 # otherwise set the remote
-$ heroku git:remote -a udia-server
-set git remote heroku to https://git.heroku.com/udia-server.git
-$ git remote add heroku https://git.heroku.com/udia-server.git
+$ heroku git:remote -a udia-tasks-server
+set git remote heroku to https://git.heroku.com/udia-tasks-server.git
+$ git remote add heroku https://git.heroku.com/udia-tasks-server.git
 ```
 
 2. Push your changes to heroku with `git push heroku master`
@@ -72,7 +72,7 @@ In Django Admin, set the value for `SITE_ID=1` in the Sites to be:
 
 ```sh
 $ git remote rm heroku
-$ heroku git:remote -a udia-server
+$ heroku git:remote -a udia-tasks-server
 $ git push heroku master
 
 $ heroku run python manage.py migrate

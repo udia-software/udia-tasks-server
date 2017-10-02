@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 def index(request):
-    return HttpResponse('API Server for UDIA.')
+    return HttpResponse('API Server for UDIA (tasks).')
 
 @api_view()
 def null_view(request):
